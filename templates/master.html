@@ -6,10 +6,20 @@
  {% load bootstrap5 %}
   {% bootstrap_css %}
   {% bootstrap_javascript %}
+<style>
+    .jumbotron {
+        padding: 20px;
+        margin-bottom: 20px;
+        background-color: #e9ecef;
+    }
+</style>
 </head>
 <body>
-{% block content %}
-    
+{% include 'includes/navbar.html' %}
+<div class="jumbotron">
+    {% block body  %}
+
 {% endblock %}
+</div>
 </body>
 </html>
