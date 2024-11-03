@@ -1,0 +1,16 @@
+{% extends 'master.html' %}
+
+{% block title %}
+Register Form
+{% endblock %}
+
+{% block body %}
+    <h2 class="mt-3">Register in Website</h2>
+    <div class="col-md-4 ">
+    <form method="POST" action="" novalidate>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Register" class="btn btn-primary">
+    </form>
+    </div>
+{% endblock %}
