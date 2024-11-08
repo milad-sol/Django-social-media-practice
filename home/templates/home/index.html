@@ -5,6 +5,11 @@
 {% endblock %}
 
 {% block body %}
-    <h2>index</h2>
-<h3>{{ text }}</h3>
+    <h2 class="text-danger">show All post</h2>
+    <div class="card">
+    {% for post in posts %}
+        <a href="{% url 'home:post_detail'  post.pk  post.slug %}"
+           class="card-body">{{ post.body|truncatewords:5 }}</a>
+    {% endfor %}
 {% endblock %}
+</div>

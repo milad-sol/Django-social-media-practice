@@ -1,0 +1,17 @@
+{% extends 'master.html' %}
+
+{% block title %}
+    Login Page
+{% endblock %}
+
+
+{% block body %}
+    <h2>Login in </h2>
+    <div class="col-6">
+        <form method="POST" action="" novalidate>
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Login" class="btn btn-danger">
+        </form>
+    </div>
+{% endblock %}
