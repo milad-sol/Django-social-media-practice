@@ -4,10 +4,16 @@
 {% block title %}
     Detail
 {% endblock %}
-
 {% block body %}
-    <h3>{{ post.user.username }} -{{ post.updated|date:"Y-M-D" }}</h3>
+    {% if request.user.id == post.user.id %}
+        <a href="{% url 'home:post_delete' post.pk %}" class="btn btn-danger mb-2">Delete Post</a>
+        <a href="{% url 'home:post_update' post.pk %}" class="btn btn-info mb-2">Update Post</a>
+    {% endif %}
+
+    <p>Autor: <a href="{% url 'account:user_profile' request.user.pk %}" class="mr-1"> {{ post.user.username }}</a>
+        Created at :{{ post.updated|date:"Y-M-D" }}</p>
+
     <p>{{ post.body }}</p>
 
-    <a href="{% url  'home:home' %}" class="btn btn-success">Home</a>
+    <a href="{% url  'home:home' %}">Back To Home</a>
 {% endblock %}

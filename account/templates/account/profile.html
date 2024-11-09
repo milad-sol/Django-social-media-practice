@@ -9,11 +9,8 @@
     <div class="card">
         {% for post in posts %}
             <div class="card-body">
-                <a href="{% url 'home:post_detail' post.pk post.slug %}"> {{ post.slug }}</a>
+                <a href="{{ post.get_absolute_url }}"> {{ post.slug }}</a>
             </div>
-
-
-
         {% endfor %}
     </div>
 
