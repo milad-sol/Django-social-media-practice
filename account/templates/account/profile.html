@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block body %}
-    <h2 class="text-center">{{ user.username }}</h2>
+    <h2 class="text-center">This is {{ user.username }}'s Profile</h2>
     {% if request.user.id == user.id %}
         <a href="{% url 'home:post_create' %}" class="btn btn-info mb-2">Create new Post</a>
     {% endif %}

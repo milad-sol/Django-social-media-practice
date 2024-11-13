@@ -15,7 +15,7 @@ class HomeView(View):
         return render(request, 'home/index.html', {'posts': posts})
 
 
-class PostDetailView(LoginRequiredMixin, View):
+class PostDetailView(View):
     def get(self, request, pk, slug):
         post = get_object_or_404(Post, pk=pk, slug=slug)
         return render(request, 'home/detail.html', {'post': post})
