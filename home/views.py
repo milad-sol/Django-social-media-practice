@@ -3,7 +3,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils.text import slugify
 from django.views import View
-from .models import Post
+from .models import Post, Comment
 from .forms import PostCreateUpdateForm
 
 
@@ -18,12 +18,14 @@ class HomeView(View):
 class PostDetailView(View):
     def get(self, request, pk, slug):
         post = get_object_or_404(Post, pk=pk, slug=slug)
-        return render(request, 'home/detail.html', {'post': post})
+        comment = post.post_comments.filter(is_reply=False)
+        return render(request, 'home/detail.html', {'post': post, 'comment': comment})
 
 
 class PostDeleteView(LoginRequiredMixin, View):
     def get(self, request, post_id):
         post = get_object_or_404(Post, pk=post_id)
+
         if post.user.id == request.user.id:
             post.delete()
             messages.success(request, 'Post deleted successfully', 'success')

@@ -12,8 +12,22 @@
 
     <p>Autor: <a href="{% url 'account:user_profile' post.user.id %}" class="mr-1"> {{ post.user.username }}</a>
         Created at :{{ post.updated|date:"Y-M-D" }}</p>
-
     <p>{{ post.body }}</p>
+    <hr>
+    
+    {% for com in comment %}
+        <div class="card bg-dark text-white">
+            <p class="card-header">
+                {{ com.user }} - {{ com.created|timesince }}
+            </p>
+            <p class="card-body">
+                {{ com.body }}
+            </p>
+            {% empty %}
+            <p class="card-body">No comment yet!</p>
+        </div>
+    {% endfor %}
+
 
     <a href="{% url  'home:home' %}">Back To Home</a>
 {% endblock %}
