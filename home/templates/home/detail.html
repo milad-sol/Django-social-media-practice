@@ -23,23 +23,31 @@
     {% else %}
         <p class="alert alert-danger">Only Logged-in users can comment.</p>
     {% endif %}
-    {% for com in comments %}
+    {% for comment in comments %}
         <div class="card bg-dark text-white">
             <p class="card-header">
-                {{ com.user }} - {{ com.created|timesince }}
+                {{ comment.user }} - {{ comment.created|timesince }}
             </p>
             <p class="card-body">
-                {{ com.body }}
-                {% with replies=com.replies_comments.all %}
-                    {% for reply in  replies %}
-                        <div>
-                            <br>
-                            <p class="bg-primary p-3 m-2 rounded"> {{ reply.user }}<br>
-                                {{ reply.body }}</p>
-                        </div>
+                {{ comment.body }}
+                {% if request.user.is_authenticated %}
+                    <form action="{% url 'home:add_reply' post.id comment.id %}" method="post" style="display: none">
+                        {% csrf_token %}
+                        {{ replay_form.as_p }}
+                        <input type="submit" value="Reply" class="btn btn-info">
+                    </form>
+                {% endif %}
 
-                    {% endfor %}
-                {% endwith %}
+            {% with replies=comment.replies_comments.all %}
+                {% for reply in  replies %}
+                    <div>
+                        <br>
+                        <p class="bg-primary p-3 m-2 rounded"> {{ reply.user }}<br>
+                            {{ reply.body }}</p>
+                    </div>
+
+                {% endfor %}
+            {% endwith %}
 
 
             {% empty %}
@@ -47,6 +55,5 @@
         </div>
     {% endfor %}
 
-    <a href="{% url  'home:home' %}">Back To Home</a>
 
 {% endblock %}
