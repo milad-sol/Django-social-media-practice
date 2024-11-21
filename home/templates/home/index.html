@@ -5,7 +5,13 @@
 {% endblock %}
 
 {% block body %}
-    <h2 class="text-danger">show All post</h2>
+
+    <div class="mb-3">
+        <form action="" method="get">
+            {{ form.as_p }}
+            <input type="submit" value="Search" class="btn btn-primary">
+        </form>
+    </div>
     <div class="card">
     {% for post in posts %}
         <a href="{{ post.get_absolute_url }}"
