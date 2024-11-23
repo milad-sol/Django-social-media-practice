@@ -10,3 +10,9 @@ class Relation(models.Model):
 
     def __str__(self):
         return '{} - Followed - {}'.format(self.from_user, self.to_user)
+
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    age = models.PositiveIntegerField(blank=True, null=True)
+    bio = models.TextField(blank=True, null=True)
