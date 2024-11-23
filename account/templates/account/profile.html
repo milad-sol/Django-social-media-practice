@@ -8,6 +8,7 @@
     <h2 class="text-center">This is {{ user.username }}'s Profile</h2>
     {% if request.user.id == user.id %}
         <a href="{% url 'home:post_create' %}" class="btn btn-info mb-2">Create new Post</a>
+        <a href="{% url 'account:edit_user' %}" class="btn btn-danger mb-2">Edit Profile</a>
     {% endif %}
 
     {% if request.user.id != user.id and not is_following %}
